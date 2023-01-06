@@ -11,6 +11,8 @@ import java.util.Scanner;
 
 public class HumanPlayerPlacement extends AbstractPlacementStrategy{
 
+    /**
+     * Takes a Fleet of boats for the user to place them on the given grid. */
     public void placeBoats(Fleet fleet, Grid grid){
 
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
@@ -26,7 +28,7 @@ public class HumanPlayerPlacement extends AbstractPlacementStrategy{
                             boat.toString(), boat.getSize());
                     String userInput = scanner.nextLine();  // Read user input
                     Position[] boatPositions = parseInput(userInput);
-                    placeOneBoat(boat, grid, boatPositions[0], boatPositions[1]);
+                    placeOneBoat(boat, grid, boatPositions[0], boatPositions[1]);   // Inherited method
                     success = true;
 
                 } catch (Exception e) {
@@ -39,6 +41,9 @@ public class HumanPlayerPlacement extends AbstractPlacementStrategy{
         System.out.println("The boats are placed!");
     }
 
+    /** Takes a String. A valid input would be i.e. "A0,A5".
+     * An Exception is thrown if the input is invalid.
+     * @return A Position array containing the start and end Position of the boat.*/
     private Position[] parseInput(String s){
         // Verify against basic heuristics
         if (s.length() < 5 || s.length() > 7)

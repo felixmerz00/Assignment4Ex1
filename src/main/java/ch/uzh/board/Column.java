@@ -18,6 +18,10 @@ public enum Column {
         this.position = pos;
     }
 
+    /**
+     * Takes a string.
+     * @return corresponding enum if it exists, else null
+     * */
     public static Column parse(String column) {
         for (Column c : Column.values()) {
             if (c.toString().equals(column)) {

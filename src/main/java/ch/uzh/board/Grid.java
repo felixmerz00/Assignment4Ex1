@@ -84,6 +84,7 @@ public class Grid {
         return String.format(String.join("%n", rowParts));
     }
 
+    /** Store the given boat in each Position between start and end. */
     public void putBoatBetweenPositions(Boat boat, Position start, Position end){
         ArrayList<Position> positions = start.pathTo(end);
         for(Position position:positions){

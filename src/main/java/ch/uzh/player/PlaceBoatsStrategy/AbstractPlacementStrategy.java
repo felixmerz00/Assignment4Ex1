@@ -10,6 +10,7 @@ public class AbstractPlacementStrategy implements IPlacementStrategy{
 
     public void placeBoats(Fleet fleet, Grid grid){}
 
+    /** Places a boat on the grid by storing the boat in each position between start and end. */
     protected void placeOneBoat(Boat boat, Grid grid, Position start, Position end){
 
         if (!boat.fitsBetween(start, end))
