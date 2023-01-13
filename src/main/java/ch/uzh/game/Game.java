@@ -15,10 +15,15 @@ public class Game {
         this.nofPlayers = 2;
     }
 
+    public void setPlayers(){
+
+    }
+
     public void setup() {
         // Set-up Phase
+        setPlayers();
         Grid player1grid = new Grid(GridType.OCEAN_GRID.toString());
-        Grid player2grid = new Grid(GridType.TARGET_GRID.toString());
+        Grid player2grid = new Grid(GridType.OCEAN_GRID.toString());
         this.players[0].assignGrid(player1grid);
         this.players[1].assignGrid(player2grid);
 
@@ -32,6 +37,7 @@ public class Game {
         int defenderId = nextPlayerAfter(attackerId);
 
         while (this.players[attackerId].fleetIsAlive()) {
+            System.out.println(players[attackerId].getName() + "'s has to make their turn!");
             if (this.players[attackerId] instanceof HumanPlayer) {
                 System.out.println(players[defenderId].showGridContent(GridType.TARGET_GRID));
                 System.out.printf("%n-----------------------%n%n");
