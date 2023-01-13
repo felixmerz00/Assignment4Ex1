@@ -1,11 +1,8 @@
 package main.java.ch.uzh;
 
 
-import main.java.ch.uzh.player.ComputerPlayer;
 import main.java.ch.uzh.player.HumanPlayer;
 import main.java.ch.uzh.game.Game;
-
-import java.util.Scanner;
 
 public class Main {
 
