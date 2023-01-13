@@ -57,7 +57,7 @@ public class Grid {
         Map<String, String> marginRows = createMarginRows();
         String marginIndex = marginRows.get("index");
         String marginBorder = marginRows.get("margin");
-        String titleBar = createTitleBar();
+        String titleBar = createTitleBar(gridType);
         String bottomBar = createBottomBar();
 
         // Add title bar and first 2 rows to main content array
@@ -148,7 +148,7 @@ public class Grid {
         return marginRows;
     }
 
-    private String createTitleBar() {
+    private String createTitleBar(GridType gridType) {
         int windowSize = 2 * (columns + 1) + 1;
         int titleSize = this.title.length();
         int paddingTotal = Math.max(2, windowSize - titleSize - 2);
@@ -156,7 +156,7 @@ public class Grid {
         int paddingRight = paddingTotal - paddingLeft;
         String prefix = new String(new char[paddingLeft]).replace('\0', '=');
         String suffix = new String(new char[paddingRight]).replace('\0', '=');
-        return String.format("%s %s %s", prefix, this.title.toUpperCase(), suffix);
+        return String.format("%s %s %s", prefix, gridType.name().toUpperCase(), suffix);
     }
 
     private String createBottomBar() {
