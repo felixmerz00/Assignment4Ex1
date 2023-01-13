@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
 
         //create new game and play the game
-        Game game = new Game(new HumanPlayer("Student"), new ComputerPlayer());
+        Game game = new Game(new HumanPlayer("Student"), new HumanPlayer("NAME"));
         game.setup();
         game.play();
     }
