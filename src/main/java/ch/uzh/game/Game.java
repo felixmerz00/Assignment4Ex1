@@ -27,7 +27,9 @@ public class Game {
         this.players[0].assignGrid(player1grid);
         this.players[1].assignGrid(player2grid);
 
+        System.out.println(players[0].getName() + " has to set their ships!");
         this.players[0].placeFleet();
+        System.out.println(players[1].getName() + " has to set their ships!");
         this.players[1].placeFleet();
     }
 
