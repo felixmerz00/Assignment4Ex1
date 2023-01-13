@@ -9,25 +9,27 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Position {
+    HasNoBoatState hasNoBoat;
+    HasBoatState hasBoat;
+    PositionState state;
 
     private final Column column;
     private final Row row;
-    private final String unknownContent;
-    private final String oceanHit;
 
     private Boat boatAtPosition;
     private boolean hasBeenAttacked;
-    private String statusView;
+
+    public static final String unknownContent = " ";
 
     public Position(Column column, Row row) {
         this.row = row;
         this.column = column;
         this.boatAtPosition = null;
         this.hasBeenAttacked = false;
-        this.unknownContent = " ";
-        this.oceanHit = "o";
 
-        this.statusView = this.unknownContent;
+        hasNoBoat = new HasNoBoatState(this);
+        hasBoat = new HasBoatState(this);
+        state = hasNoBoat;
     }
 
     // Does not change the state.
@@ -111,10 +113,14 @@ public class Position {
     /** Occupy this Position. The method takes a Boat object and stores it. */
     public void placeBoat(Boat boat) {
         this.boatAtPosition = boat;
+        state = hasBoat;
     }
 
     public boolean attack() {
         this.hasBeenAttacked = true;
+        return state.attack();
+
+        /*
         if (this.boatAtPosition != null) {
             return this.boatAtPosition.takeHitAtPosition(this);
         }
@@ -122,6 +128,7 @@ public class Position {
             this.statusView = oceanHit;
             return false;
         }
+         */
     }
 
     // Does not change the state.
@@ -131,10 +138,15 @@ public class Position {
 
     // Does not change the state.
     public String revealContent(GridType gridType) {
+        return state.revealContent(gridType);
+
+        /*
         if ((this.boatAtPosition != null) && (gridType == GridType.OCEAN_GRID || gridType == GridType.CHEAT_GRID || this.hasBeenAttacked)) {
             return this.boatAtPosition.showStatusAtPosition(this, gridType);
         }
         return this.statusView;
+
+         */
     }
 
     // Does not change the state.
@@ -145,6 +157,14 @@ public class Position {
     // Does not change the state.
     public Column getColumn() {
         return column;
+    }
+
+    public Boat getBoatAtPosition(){
+        return boatAtPosition;
+    }
+
+    public boolean getHasBeenAttacked(){
+        return hasBeenAttacked;
     }
 
     @Override
