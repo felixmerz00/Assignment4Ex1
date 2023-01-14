@@ -14,21 +14,23 @@ public abstract class Boat {
      * We must make sure, that a position can only be shot once!
      */
 
-    private boolean isDestroyed;
     private final String type;
-    private final String representator;
+    private final String representation;
     private final int size;
     private final String damage;
     private final List<Position> span = new ArrayList<>();
-    private int hitCount;
+    private final NotDestroyedState aNotDestroyedState;
+    private final DestroyedState aDestroyedState;
+    private BoatState state;
 
-    public Boat(String type, String representator, int size) {
+    public Boat(String type, String representation, int size) {
         this.type = type;
-        this.representator = representator;
+        this.representation = representation;
         this.size = size;
-        this.hitCount = 0;
-        this.isDestroyed = false;
         this.damage = "X";
+        this.aNotDestroyedState = new NotDestroyedState(this);
+        this.aDestroyedState = new DestroyedState(this);
+        this.state = aNotDestroyedState;
     }
 
     public void expandSize(Position position) {
@@ -41,30 +43,25 @@ public abstract class Boat {
         if (span.contains(position)) {
             span.remove(position);
             if (span.isEmpty()) {
-                this.isDestroyed = true;
+                state = aDestroyedState;
             }
         }
-        return this.isDestroyed;
+        return state.isDestroyed();
     }
 
     public String showStatusAtPosition(Position position, GridType gridType) {
         if (gridType == GridType.OCEAN_GRID) {
-            // Show X for damaged positions, representator for all other positions
+            // Show X for damaged positions, representation for all other positions
             if (span.contains(position)) {
-                return this.representator;
+                return this.representation;
             }
             else {
                 return this.damage;
             }
         }
         else {
-            // Only show damaged positions; show representator if destroyed completely
-            if (this.isDestroyed) {
-                return this.representator;
-            }
-            else {
-                return this.damage;
-            }
+            // Only show damaged positions; show representation if destroyed completely
+            return state.showStatusAtPosition();
         }
     }
 
@@ -86,7 +83,15 @@ public abstract class Boat {
     }
 
     public boolean stillAlive() {
-        return !this.isDestroyed;
+        return !state.isDestroyed();
+    }
+
+    public String getRepresentation() {
+        return representation;
+    }
+
+    public String getDamage() {
+        return damage;
     }
 
     @Override
