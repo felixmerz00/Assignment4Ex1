@@ -12,13 +12,14 @@ public class HasNoBoatState implements PositionState {
     }
 
     @Override
-    public String revealContent(GridType gridType) {
-        return statusView;
-    }
-
-    @Override
     public boolean attack() {
         statusView = oceanHit;
         return false;
     }
+
+    @Override
+    public String revealContent(GridType gridType) {
+        return statusView;
+    }
+
 }
