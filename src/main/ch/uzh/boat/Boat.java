@@ -38,6 +38,9 @@ public abstract class Boat {
         }
     }
 
+    /**
+     * @return true if boat is completely sunk, false otherwise
+     */
     public boolean takeHitAtPosition(Position position) {
         if (span.contains(position)) {
             span.remove(position);
