@@ -16,7 +16,7 @@ public class HasBoatState implements PositionState {
 
     @Override
     public String revealContent(GridType gridType) {
-        if ((gridType == GridType.OCEAN_GRID || gridType == GridType.CHEAT_GRID || aPosition.getHasBeenAttacked())) {
+        if ((gridType == GridType.OCEAN_GRID || aPosition.getHasBeenAttacked())) {
             return aPosition.getBoatAtPosition().showStatusAtPosition(aPosition, gridType);
         }
         return Position.unknownContent;

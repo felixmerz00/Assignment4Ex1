@@ -82,13 +82,24 @@ class PositionTest {
 
     // Test revealContent method before an attack when Position is in HasBoatState.
     @Test
-    void hasBoatRevealContentBeforeAttack() {
+    void hasBoatRevealContentBeforeAttack1() {
         PatrolBoat aPatrolBoat = new PatrolBoat();
         Position testPosition = new Position(Column.A, Row._0);
         testPosition.placeBoat(aPatrolBoat);
 
         // Call UUT and make assertion.
         assertEquals(" ", testPosition.revealContent(GridType.TARGET_GRID));
+    }
+
+    @Test
+    void hasBoatRevealContentBeforeAttack2() {
+        PatrolBoat aPatrolBoat = new PatrolBoat();
+        Position testPosition = new Position(Column.A, Row._0);
+        aPatrolBoat.expandSize(testPosition);
+        testPosition.placeBoat(aPatrolBoat);
+
+        // Call UUT and make assertion.
+        assertEquals("P", testPosition.revealContent(GridType.OCEAN_GRID));
     }
 
     // Test revealContent method after an attack when Position is in HasBoatState.
