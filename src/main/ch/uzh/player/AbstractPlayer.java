@@ -2,7 +2,7 @@ package ch.uzh.player;
 
 import ch.uzh.board.Grid;
 import ch.uzh.board.GridType;
-import ch.uzh.board.Position;
+import ch.uzh.board.position.Position;
 import ch.uzh.boat.Fleet;
 import ch.uzh.player.AttackStrategy.IAttackStrategy;
 import ch.uzh.player.PlaceBoatsStrategy.IPlacementStrategy;

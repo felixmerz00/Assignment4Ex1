@@ -2,7 +2,7 @@ package ch.uzh.player.PlaceBoatsStrategy;
 
 import ch.uzh.board.Grid;
 import ch.uzh.board.GridType;
-import ch.uzh.board.Position;
+import ch.uzh.board.position.Position;
 import ch.uzh.boat.Boat;
 import ch.uzh.boat.Fleet;
 import java.util.InputMismatchException;

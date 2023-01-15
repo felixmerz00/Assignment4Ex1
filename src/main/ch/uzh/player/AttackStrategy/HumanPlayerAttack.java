@@ -1,6 +1,6 @@
 package ch.uzh.player.AttackStrategy;
 
-import ch.uzh.board.Position;
+import ch.uzh.board.position.Position;
 import ch.uzh.player.IPlayer;
 import java.util.InputMismatchException;
 import java.util.Scanner;

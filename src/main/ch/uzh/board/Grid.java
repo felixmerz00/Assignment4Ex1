@@ -1,5 +1,6 @@
 package ch.uzh.board;
 
+import ch.uzh.board.position.Position;
 import ch.uzh.boat.Boat;
 import java.util.*;
 

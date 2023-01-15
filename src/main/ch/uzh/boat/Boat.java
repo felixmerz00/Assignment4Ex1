@@ -2,7 +2,7 @@ package ch.uzh.boat;
 
 import ch.uzh.board.Direction;
 import ch.uzh.board.GridType;
-import ch.uzh.board.Position;
+import ch.uzh.board.position.Position;
 import java.util.ArrayList;
 import java.util.List;
 

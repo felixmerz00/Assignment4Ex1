@@ -1,5 +1,9 @@
-package ch.uzh.board;
+package ch.uzh.board.position;
 
+import ch.uzh.board.Column;
+import ch.uzh.board.Direction;
+import ch.uzh.board.GridType;
+import ch.uzh.board.Row;
 import ch.uzh.boat.Boat;
 import java.util.ArrayList;
 import java.util.Objects;

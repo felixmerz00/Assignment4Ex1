@@ -1,4 +1,6 @@
-package ch.uzh.board;
+package ch.uzh.board.position;
+
+import ch.uzh.board.GridType;
 
 public class HasNoBoatState implements PositionState {
     private String statusView;

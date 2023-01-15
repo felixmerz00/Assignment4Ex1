@@ -1,6 +1,6 @@
 package ch.uzh.player.AttackStrategy;
 
-import ch.uzh.board.Position;
+import ch.uzh.board.position.Position;
 import java.util.HashSet;
 import java.util.Set;
 
