@@ -13,8 +13,4 @@ public class DestroyedState implements BoatState {
         return aBoat.getRepresentation();
     }
 
-    @Override
-    public boolean isDestroyed() {
-        return true;
-    }
 }

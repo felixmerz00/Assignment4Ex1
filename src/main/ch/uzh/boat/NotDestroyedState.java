@@ -12,8 +12,4 @@ public class NotDestroyedState implements BoatState {
         return aBoat.getDamage();
     }
 
-    @Override
-    public boolean isDestroyed() {
-        return false;
-    }
 }

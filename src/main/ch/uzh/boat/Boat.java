@@ -48,7 +48,7 @@ public abstract class Boat {
                 state = aDestroyedState;
             }
         }
-        return state.isDestroyed();
+        return DestroyedState.class == state.getClass();
     }
 
     public String showStatusAtPosition(Position position, GridType gridType) {
@@ -60,7 +60,7 @@ public abstract class Boat {
                 return this.damage;
             }
         } else {
-            // Only show damaged positions; show representation if destroyed completely
+            // Return "X" if boat is not completely destroyed yet, else show representation
             return state.showStatusAtPosition();
         }
     }
@@ -83,7 +83,7 @@ public abstract class Boat {
     }
 
     public boolean stillAlive() {
-        return !state.isDestroyed();
+        return NotDestroyedState.class == state.getClass();
     }
 
     public String getRepresentation() {
