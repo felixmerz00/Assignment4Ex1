@@ -4,7 +4,7 @@ import ch.uzh.board.GridType;
 import ch.uzh.boat.Boat;
 
 public class HasBoatState implements PositionState {
-    private Position aPosition;
+    private final Position aPosition;
     private Boat boatAtPosition;
 
     public HasBoatState(Position p) {
