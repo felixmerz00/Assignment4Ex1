@@ -1,6 +1,5 @@
 package ch.uzh.player.AttackStrategy;
 
-import ch.uzh.player.PlaceBoatsStrategy.HumanPlayerPlacement;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
@@ -12,7 +11,7 @@ class HumanPlayerAttackTest {
     private void verifyInput(String s) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         Method method = HumanPlayerAttack.class.getDeclaredMethod("verifyInput", String.class);
         method.setAccessible(true);
-        method.invoke(new HumanPlayerPlacement(), s);
+        method.invoke(new HumanPlayerAttack(), s);
     }
 
     //Invalid Input -> too long
@@ -23,6 +22,7 @@ class HumanPlayerAttackTest {
 
     @Test
     void nullInput() {
-        assertThrows(InvocationTargetException.class, () -> verifyInput(null));
+        assertThrows(InvocationTargetException.class, () -> verifyInput("Z0"));
     }
+
 }
