@@ -38,6 +38,7 @@ public abstract class Boat {
         }
     }
 
+    // Potentially changes the state of the Boat object.
     /**
      * @return true if boat is completely sunk, false otherwise
      */
@@ -53,7 +54,7 @@ public abstract class Boat {
 
     public String showStatusAtPosition(Position position, GridType gridType) {
         if (gridType == GridType.OCEAN_GRID) {
-            // Show X for damaged positions, representation for all other positions
+            // Show "X" for damaged positions, else show representation
             if (span.contains(position)) {
                 return this.representation;
             } else {
