@@ -53,6 +53,15 @@ class PositionTest {
         assertEquals("o", testPosition.revealContent(GridType.TARGET_GRID));
     }
 
+    // Test isFree method when Position is in HasNoBoatState.
+    @Test
+    void hasNoBoatIsFree() {
+        Position testPosition = new Position(Column.A, Row._0);
+
+        // Call UUT and make assertion.
+        assertTrue(testPosition.isFree());
+    }
+
     // Test the switch from HasNoBoatState to HasBoatState.
     @Test
     void stateChange() throws NoSuchFieldException, IllegalAccessException {
@@ -114,4 +123,14 @@ class PositionTest {
         assertEquals("X", testPosition.revealContent(GridType.TARGET_GRID));
     }
 
+    // Test isFree method when Position is in HasBoatState.
+    @Test
+    void hasBoatIsFree() {
+        PatrolBoat aPatrolBoat = new PatrolBoat();
+        Position testPosition = new Position(Column.A, Row._0);
+        testPosition.placeBoat(aPatrolBoat);
+
+        // Call UUT and make assertion.
+        assertFalse(testPosition.isFree());
+    }
 }

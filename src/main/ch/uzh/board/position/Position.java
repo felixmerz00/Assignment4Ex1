@@ -19,7 +19,7 @@ public class Position {
     private final Column column;
     private final Row row;
 
-    private Boat boatAtPosition;
+    // private Boat boatAtPosition;
     private boolean hasBeenAttacked;
 
     public static final String unknownContent = " ";
@@ -27,7 +27,7 @@ public class Position {
     public Position(Column column, Row row) {
         this.row = row;
         this.column = column;
-        this.boatAtPosition = null;
+        // this.boatAtPosition = null;
         this.hasBeenAttacked = false;
 
         hasNoBoat = new HasNoBoatState(this);
@@ -115,7 +115,8 @@ public class Position {
 
     // Does not change the state.
     public boolean isFree() {
-        return this.boatAtPosition == null;
+        // return this.boatAtPosition == null;
+        return HasNoBoatState.class == state.getClass();
     }
 
     // Does not depend on the state of the object.
@@ -124,7 +125,8 @@ public class Position {
      * Occupy this Position. The method takes a Boat object and stores it.
      */
     public void placeBoat(Boat boat) {
-        this.boatAtPosition = boat;
+        // this.boatAtPosition = boat;
+        hasBoat.setBoatAtPosition(boat);
         state = hasBoat;
     }
 
@@ -171,9 +173,11 @@ public class Position {
         return column;
     }
 
+    /*
     public Boat getBoatAtPosition() {
         return boatAtPosition;
     }
+     */
 
     public boolean getHasBeenAttacked() {
         return hasBeenAttacked;
