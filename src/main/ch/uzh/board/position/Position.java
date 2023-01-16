@@ -18,24 +18,18 @@ public class Position {
 
     private final Column column;
     private final Row row;
-
-    // private Boat boatAtPosition;
     private boolean hasBeenAttacked;
-
     public static final String unknownContent = " ";
 
     public Position(Column column, Row row) {
         this.row = row;
         this.column = column;
-        // this.boatAtPosition = null;
         this.hasBeenAttacked = false;
 
         hasNoBoat = new HasNoBoatState(this);
         hasBoat = new HasBoatState(this);
         state = hasNoBoat;
     }
-
-    // Does not change the state.
 
     /**
      * Takes a String. A valid input would be i.e. "A0".
@@ -56,9 +50,6 @@ public class Position {
         return null;
     }
 
-    // Does not change the state.
-    // Does not depend on the state of the object.
-
     /**
      * @return The distance between the implicit and the explicit argument.
      */
@@ -72,8 +63,6 @@ public class Position {
         return Optional.of(Math.max(deltaRow, deltaCol));
     }
 
-    // Does not change the state.
-    // Does not depend on the state of the object.
     public Position neighbour(Direction direction) {
         int newX = this.column.valueOf() + direction.getDeltaX();
         int newY = this.row.valueOf() + direction.getDeltaY();
@@ -85,16 +74,12 @@ public class Position {
         return null;
     }
 
-    // Does not change the state.
-    // Does not depend on the state of the object.
     public Direction directionTo(Position p) {
         int dirCol = this.column.directionTo(p.column);
         int dirRow = this.row.directionTo(p.row);
         return Direction.determineDirection(dirCol, dirRow);
     }
 
-    // Does not change the state.
-    // Does not depend on the state of the object.
     public ArrayList<Position> pathTo(Position targetPosition) {
         Direction direction = this.directionTo(targetPosition);
         int distance = this.distanceTo(targetPosition).orElse(0);
@@ -113,71 +98,42 @@ public class Position {
         return between;
     }
 
-    // Does not change the state.
+    // Depends on the state.
     public boolean isFree() {
-        // return this.boatAtPosition == null;
         return HasNoBoatState.class == state.getClass();
     }
 
-    // Does not depend on the state of the object.
-
+    // Changes the state of the object.
     /**
      * Occupy this Position. The method takes a Boat object and stores it.
      */
     public void placeBoat(Boat boat) {
-        // this.boatAtPosition = boat;
         hasBoat.setBoatAtPosition(boat);
         state = hasBoat;
     }
 
+    // Depends on the state.
     public boolean attack() {
         this.hasBeenAttacked = true;
         return state.attack();
-
-        /*
-        if (this.boatAtPosition != null) {
-            return this.boatAtPosition.takeHitAtPosition(this);
-        }
-        else {
-            this.statusView = oceanHit;
-            return false;
-        }
-         */
     }
 
-    // Does not change the state.
     public boolean wasTarget() {
         return this.hasBeenAttacked;
     }
 
-    // Does not change the state.
+    // Depends on the state.
     public String revealContent(GridType gridType) {
         return state.revealContent(gridType);
-
-        /*
-        if ((this.boatAtPosition != null) && (gridType == GridType.OCEAN_GRID || gridType == GridType.CHEAT_GRID || this.hasBeenAttacked)) {
-            return this.boatAtPosition.showStatusAtPosition(this, gridType);
-        }
-        return this.statusView;
-
-         */
     }
 
-    // Does not change the state.
     public Row getRow() {
         return row;
     }
 
-    // Does not change the state.
     public Column getColumn() {
         return column;
     }
-
-    /*
-    public Boat getBoatAtPosition() {
-        return boatAtPosition;
-    }
-     */
 
     public boolean getHasBeenAttacked() {
         return hasBeenAttacked;
