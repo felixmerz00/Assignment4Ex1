@@ -21,25 +21,24 @@ class FleetTest {
         assertTrue(fleet.stillStanding());
     }
 
-    // Test when only one boat is destroyed
-    // TODO Maybe change this case to a situation where every position of every boat is destroyed except for one. Because this would be an edge case.
+    // Test case where every boat has been destroyed except for one.
     @Test
-    void oneShipDestroyed() throws NoSuchFieldException, IllegalAccessException {
+    void allButOneShipDestroyed() throws NoSuchFieldException, IllegalAccessException {
         Fleet fleet = new Fleet();
         expandSizeOfEveryBoat(fleet);   // Fill the boats with Position objects.
         // We will need the "span" field of Boat objects, so we make it accessible.
         Field spanField = Boat.class.getDeclaredField("span");
         spanField.setAccessible(true);
 
-        // Destroy one boat, i.e. the carrier.
+        // Destroy every position of every boat except for the last position of the last boat.
+        int positionDestroyedCount = 0;
         for (Boat boat : fleet) {
-            if (boat instanceof Carrier) {
-                List<Position> span = (List<Position>) spanField.get(boat);
-                for (int i = 0; i < boat.getSize(); i++) {
-                    Position position = span.get(0);
-                    boat.takeHitAtPosition(position);
+            List<Position> span = (List<Position>) spanField.get(boat);
+            for (int i = 0; i < boat.getSize(); i++) {
+                if (positionDestroyedCount < 30) {
+                    boat.takeHitAtPosition(span.get(0));
+                    positionDestroyedCount++;
                 }
-                break;
             }
         }
 
@@ -81,7 +80,7 @@ class FleetTest {
                 new Position(Column.D, Row._0), new Position(Column.D, Row._1), // PatrolBoat 1
                 new Position(Column.D, Row._2), new Position(Column.D, Row._3), // PatrolBoat 2
                 new Position(Column.D, Row._4), new Position(Column.D, Row._5), // PatrolBoat 3
-                new Position(Column.D, Row._6), new Position(Column.D, Row._7), // PatrolBoat 4
+                new Position(Column.D, Row._6), new Position(Column.D, Row._7) // PatrolBoat 4
         };
         int i = 0;
         for(Boat b: fleet){
