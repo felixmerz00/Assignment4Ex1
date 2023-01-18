@@ -6,6 +6,7 @@ import ch.uzh.board.GridType;
 import ch.uzh.board.Row;
 import ch.uzh.board.position.Position;
 import ch.uzh.boat.Carrier;
+import ch.uzh.boat.Submarine;
 import org.junit.jupiter.api.Test;
 
 import java.util.InputMismatchException;
@@ -41,7 +42,24 @@ class AbstractPlacementStrategyTest {
         Position end = new Position(Column.A, Row._4);
         HumanPlayerPlacement placementStrategy = new HumanPlayerPlacement();
 
+        // The test passes if the UUT does raise an InputMismatch Exception.
+        assertThrows(InputMismatchException.class, () -> placementStrategy.placeOneBoat(aCarrier, aGrid, start, end));
+    }
+
+    // Test for a boat which crosses another already placed boat.
+    @Test
+    void placeOneBoatThatCrossesAnotherOne() {
+        Submarine aSubmarine = new Submarine();
+        Grid aGrid = new Grid(GridType.OCEAN_GRID.toString());
+        Position startBoat1 = new Position(Column.B, Row._0);
+        Position endBoat1 = new Position(Column.B, Row._2);
+        Position startBoat2 = new Position(Column.A, Row._1);
+        Position endBoat2 = new Position(Column.C, Row._1);
+        HumanPlayerPlacement placementStrategy = new HumanPlayerPlacement();
+
+        /*
         // The test passes if the UUT does not raise an InputMismatch Exception.
+
         try {
             // Call UUT
             placementStrategy.placeOneBoat(aCarrier, aGrid, start, end);
@@ -49,8 +67,7 @@ class AbstractPlacementStrategyTest {
         }catch (InputMismatchException ignored){
 
         }
+
+         */
     }
-
-    // Test for a boat which crosses another already placed boat.
-
 }
