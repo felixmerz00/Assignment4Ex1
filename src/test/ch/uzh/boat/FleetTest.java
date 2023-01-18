@@ -14,15 +14,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FleetTest {
 
-    //when fleet is initialized, all boats are alive
+    // When fleet is initialized, all boats are alive
     @Test
     void stillStanding() {
         Fleet fleet = new Fleet();
         assertTrue(fleet.stillStanding());
     }
 
-
-    //Test when only one boat is destroyed
+    // Test when only one boat is destroyed
     @Test
     void oneShipDestroyed() throws NoSuchFieldException, IllegalAccessException {
         Fleet fleet = new Fleet();
@@ -63,7 +62,6 @@ class FleetTest {
         }
         assertFalse(fleet.stillStanding());
     }
-
 
     // Helper method: Usually the grid expands the size of each boat. Because we aren't using any Grid objects in our tests, this method does the task for us.
     private void expandSizeOfEveryBoat(Fleet fleet) {
