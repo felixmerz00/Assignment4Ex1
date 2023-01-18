@@ -22,6 +22,7 @@ class FleetTest {
     }
 
     // Test when only one boat is destroyed
+    // TODO Maybe change this case to a situation where every position of every boat is destroyed except for one. Because this would be an edge case.
     @Test
     void oneShipDestroyed() throws NoSuchFieldException, IllegalAccessException {
         Fleet fleet = new Fleet();
@@ -49,17 +50,21 @@ class FleetTest {
     @Test
     void allShipsDestroyed() throws NoSuchFieldException, IllegalAccessException {
         Fleet fleet = new Fleet();
-        Iterator<Boat> it = fleet.iterator();
-        while (it.hasNext()) {
-            Boat boat = it.next();
-            Field spanField = Boat.class.getDeclaredField("span");
-            spanField.setAccessible(true);
+        expandSizeOfEveryBoat(fleet);
+        // We will need the "span" field of Boat objects, so we make it accessible.
+        Field spanField = Boat.class.getDeclaredField("span");
+        spanField.setAccessible(true);
+
+        // Destroy whole fleet by attacking every position of every boat.
+        for (Boat boat : fleet) {
             List<Position> span = (List<Position>) spanField.get(boat);
             for (int i = 0; i < boat.getSize(); i++) {
-                Position position = span.get(i);
+                Position position = span.get(0);
                 boat.takeHitAtPosition(position);
             }
         }
+
+        // Call UUT and make assertion
         assertFalse(fleet.stillStanding());
     }
 
