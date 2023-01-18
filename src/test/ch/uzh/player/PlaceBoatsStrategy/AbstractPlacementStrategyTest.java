@@ -57,17 +57,13 @@ class AbstractPlacementStrategyTest {
         Position endBoat2 = new Position(Column.C, Row._1);
         HumanPlayerPlacement placementStrategy = new HumanPlayerPlacement();
 
+        // Place the first boat.
+        placementStrategy.placeOneBoat(aSubmarine, aGrid, startBoat1, endBoat1);
+
         /*
-        // The test passes if the UUT does not raise an InputMismatch Exception.
-
-        try {
-            // Call UUT
-            placementStrategy.placeOneBoat(aCarrier, aGrid, start, end);
-            fail("InputMismatchException should be thrown");
-        }catch (InputMismatchException ignored){
-
-        }
-
+        * Place second boat across the first one.
+        * The test passes if the UUT does raise an InputMismatch Exception.
          */
+        assertThrows(InputMismatchException.class, () -> placementStrategy.placeOneBoat(aSubmarine, aGrid, startBoat2, endBoat2));
     }
 }
