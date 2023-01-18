@@ -13,8 +13,8 @@ import java.util.InputMismatchException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AbstractPlacementStrategyTest {
-    // Test for valid input.
 
+    // Test for valid input.
     @Test
     void placeOneValidBoat() {
         Carrier aCarrier = new Carrier();
@@ -33,6 +33,23 @@ class AbstractPlacementStrategyTest {
     }
 
     // Test for a boat which does not fit between the entered start and end positions.
+    @Test
+    void placeOneBoatThatDoesNotFit() {
+        Carrier aCarrier = new Carrier();
+        Grid aGrid = new Grid(GridType.OCEAN_GRID.toString());
+        Position start = new Position(Column.A, Row._0);
+        Position end = new Position(Column.A, Row._4);
+        HumanPlayerPlacement placementStrategy = new HumanPlayerPlacement();
+
+        // The test passes if the UUT does not raise an InputMismatch Exception.
+        try {
+            // Call UUT
+            placementStrategy.placeOneBoat(aCarrier, aGrid, start, end);
+            fail("InputMismatchException should be thrown");
+        }catch (InputMismatchException ignored){
+
+        }
+    }
 
     // Test for a boat which crosses another already placed boat.
 
